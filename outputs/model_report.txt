@@ -1,0 +1,17 @@
+Task 1: Predict Restaurant Ratings - Model Report
+==================================================
+
+Linear Regression: MSE = 1.5599, R-squared = 0.3147
+Decision Tree Regression: MSE = 0.1115, R-squared = 0.9510
+
+Top 10 influential features (Decision Tree):
+  Votes: 0.9715
+  Longitude: 0.0117
+  Latitude: 0.0054
+  Cuisines: 0.0049
+  Average Cost for two: 0.0029
+  City: 0.0017
+  Locality: 0.0011
+  Currency: 0.0005
+  Price range: 0.0002
+  Has Online delivery: 0.0001
