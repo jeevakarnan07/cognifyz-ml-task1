@@ -1,57 +1,36 @@
-# Task 1 — Predict Restaurant Ratings
-Cognifyz Technologies · Machine Learning Internship
+# Restaurant Rating Prediction
 
-## Aim
-Build a machine learning model to predict the aggregate rating of a
-restaurant based on other features in the dataset.
+Machine learning regression project that predicts restaurant aggregate ratings from restaurant attributes using scikit-learn.
 
-## Dataset
-`data/Dataset.csv` — 9,551 restaurants with features such as location,
-cuisines, price range, votes, and the target column `Aggregate rating`.
+## Project Summary
 
-## Procedure
-1. **Preprocessing** (`src/predict_ratings.py`)
-   - Dropped identifier / free-text columns not useful for modeling
-     (Restaurant ID, Name, Address, etc.).
-   - Filled missing numeric values with the median, missing categorical
-     values with `"Unknown"`.
-   - Encoded categorical variables using `LabelEncoder`.
-   - Split data 80/20 into training and testing sets.
-2. **Modeling**
-   - Trained a **Linear Regression** model as a baseline.
-   - Trained a **Decision Tree Regressor** (max_depth=10).
-3. **Evaluation**
-   - Compared models using Mean Squared Error (MSE) and R-squared (R²)
-     on the held-out test set.
-4. **Interpretation**
-   - Extracted feature importances from the Decision Tree model to see
-     which features most influence the predicted rating.
+This project builds and compares regression models for predicting restaurant ratings from a dataset of 9,551 restaurants. It demonstrates a complete ML workflow: data cleaning, categorical encoding, train/test evaluation, model comparison, and feature-importance analysis.
 
-## Result
-| Model | MSE | R² |
-|---|---|---|
-| Linear Regression | ~1.56 | ~0.31 |
-| Decision Tree Regression | ~0.11 | ~0.95 |
+## Models
 
-The **Votes** column is by far the most influential feature, followed by
-location (Longitude/Latitude) and Cuisines. Full numbers are written to
-`outputs/model_report.txt` and a chart is saved to
-`outputs/feature_importance.png` each time the script runs.
+- Linear Regression — baseline model
+- Decision Tree Regressor — non-linear model
 
-## How to run
+## Evaluation
 
-```bash
-python -m venv .venv
-source .venv/bin/activate      # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-python src/predict_ratings.py
-```
+Models are evaluated on a held-out test set using:
 
-Outputs (`model_report.txt`, `feature_importance.png`) are written to the
-`outputs/` folder.
+- Mean Squared Error (MSE)
+- R² score
 
-## Project structure
-```
+The current Decision Tree baseline substantially outperforms Linear Regression on the supplied dataset. See `outputs/model_report.txt` for the run-specific metrics.
+
+## Key Insight
+
+Votes are the strongest predictive signal in the current feature set, with geographic and cuisine-related variables also contributing. The project should treat the high tree-model R² as a dataset-specific result rather than a guarantee of real-world performance.
+
+## Tech Stack
+
+Python · pandas · NumPy · scikit-learn · matplotlib
+
+## Project Structure
+
+```text
 cognifyz-ml-task1/
 ├── data/
 │   └── Dataset.csv
@@ -64,3 +43,32 @@ cognifyz-ml-task1/
 ├── .gitignore
 └── README.md
 ```
+
+## Run Locally
+
+```bash
+python -m venv .venv
+# Windows
+.venv\Scripts\activate
+# macOS/Linux
+# source .venv/bin/activate
+
+pip install -r requirements.txt
+python src/predict_ratings.py
+```
+
+## Recommended Next Improvements
+
+1. Replace ordinal-style `LabelEncoder` treatment of nominal input features with a `ColumnTransformer` and `OneHotEncoder` where appropriate.
+2. Add MAE and RMSE alongside MSE/R².
+3. Add cross-validation and compare Random Forest / Gradient Boosting regressors.
+4. Add a small prediction interface or Streamlit demo.
+5. Save the trained model and preprocessing pipeline for reproducible inference.
+
+## Resume Description
+
+**Restaurant Rating Prediction | Python, scikit-learn, pandas** — Built regression models to predict restaurant ratings from 9,551 records; implemented preprocessing, categorical encoding, model comparison, evaluation with MSE/R², and feature-importance analysis.
+
+## Author
+
+**Jeeva Karnan** · B.Tech Artificial Intelligence & Data Science
